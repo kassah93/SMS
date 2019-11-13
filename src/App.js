@@ -1,13 +1,17 @@
 import React from 'react';
+import {BrowserRouter as Router} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { Main } from './components/MainComponent';
 
 function App() {
   return (
-    <React.Fragment>
-      <Main />
-    </React.Fragment>
+    <Router>
+      <React.Fragment>
+        <Main  />
+      </React.Fragment>
+    </Router>
+    
   );
 }
 

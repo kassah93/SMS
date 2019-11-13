@@ -1,37 +1,41 @@
 import React , {Component} from 'react';
-import {Redirect , Link} from 'react-router-dom';
-import {Card, CardHeader, CardBody, FormGroup, Form, Button, Input} from 'reactstrap';
+import {Redirect, Link } from 'react-router-dom';
+import {Card, CardHeader, CardBody, FormGroup, Form, Button, Input, FormFeedback} from 'reactstrap';
 import {baseUrl} from '../baseUrl';
 import {setUserCookie} from '../shared/AuthService';
 import UserContext from '../context/UserContext';
 
-export class Login extends Component {
+export class Register extends Component {
     constructor(props){
-       
         super(props);
         this.state = {
-            isLogging : false,
-            errMess   : null,
+            isRegistering : false,
+            errMess       : null,
             user : {
-                username : '',
-                password : ''
+                username        : '',
+                password        : '',
+                confirmPassword : ''
+            },
+            errors : {
+                username : null,
+                password : null,
+                confirmPassword : null
             }
         };
         this.mounted = false;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.validatePassword = this.validatePassword.bind(this);
         
     }
     handleSubmit(authUser) {
         return (event) => {
-            console.log("submitted!");
             event.preventDefault();
-            this.handleLogin(this.state.user , authUser);
+            this.handleRegister(this.state.user , authUser);
         }
     }
 
     handleChange(event){
-        //console.log(event.target.value);
         let key = event.target.name;
         this.setState({
             ...this.state,
@@ -40,19 +44,46 @@ export class Login extends Component {
                 [key] : event.target.value
             }
         });
-        //console.log(this.state.user);
+    }
+
+    validatePassword(event) {
+        console.log(event.target.parent);
+        if (this.state.user.password !== this.state.user.confirmPassword) {
+            this.setState(state => ({
+                ...state,
+                errors : {
+                    ...state.errors,
+                    ['confirmPassword'] : "Password doesn't match"
+                }  
+            }));
+            this.controlSubmitDisabled(true);
+        } else {
+            this.setState(state => ({
+                ...state,
+                errors : {
+                    ...state.errors,
+                    ['confirmPassword'] : null
+                }  
+            }));
+            this.controlSubmitDisabled(false);
+        }
+        console.log(this.state.errors);
+    }
+
+    controlSubmitDisabled(value) {
+        let submitButton = document.querySelector('button#signup');
+        submitButton.disabled = value;
     }
 
     componentDidMount() {
         this.mounted = true;
-        console.log('Mounted' , this.mounted);
     }
+
     componentWillUnmount() {
-        console.log('unmounted');
-        this.setState(state => ({
-            isLogging : false
-        }));
         this.mounted = false;
+        this.setState(state => ({
+            isRegistering : false
+        }));
     }
 
     render() {
@@ -70,24 +101,31 @@ export class Login extends Component {
                                     <div className = "col-lg-4 col-sm-12">
                                         <Card className = "mt-3">
                                             <CardHeader className = "login-form-header">
-                                                <h3> Log in </h3> 
+                                                <h3> Sign up </h3> 
                                             </CardHeader>
                                             <CardBody>
                                                 <Form onSubmit = {this.handleSubmit(authUser)} onChange = {this.handleChange} method = "POST"> 
                                                     <FormGroup>
                                                         <Input type = "text" id = "username" name = "username" placeholder = "Username" />
                                                     </FormGroup>
+
                                                     <FormGroup>
                                                         <Input type = "password" id = "password" name = "password" placeholder = "Password" />
                                                     </FormGroup>
+
+                                                    <FormGroup>
+                                                        <Input onKeyUp = {this.validatePassword} type = "password" id = "confirmPassword" name = "confirmPassword" placeholder = "Type password again" />
+                                                        {this.state.errors.confirmPassword && <div className = "text-danger" > {this.state.errors.confirmPassword} </div>} 
+                                                    </FormGroup>
                                                     
-                                                    <Button type = "submit" color = "primary" block>Sign in</Button>                                  
+                                                    <Button id = "signup" type = "submit" color = "primary" block>Sign up</Button>                                  
                                                 </Form>  
 
                                                 <div className = "primary" >
-                                                    <Link to = "/register" > Don't have an account? Sign up instead! </Link>
+                                                    <Link to = "/login" > Already have account? Login instead! </Link>
                                                 </div>                              
                                             </CardBody>
+
                                         </Card>
                                         {this.state.errMess? (<div className = "alert alert-danger text-center"> {this.state.errMess} </div>) : null} 
                                     </div>
@@ -100,11 +138,13 @@ export class Login extends Component {
         );
     }
 
-     handleLogin(user, authUser)  {
-        this.setState(state => ({
-            isLogging : true
+     handleRegister(user, authUser)  {
+        console.log("handle Register!!");
+        this.setState( state => ({
+            isRegistering : true
         }));
-        fetch(baseUrl + 'AppUsers/login', {
+        
+        fetch(baseUrl + 'AppUsers/register', {
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json',
@@ -140,19 +180,19 @@ export class Login extends Component {
                 //console.log(data);
                 setUserCookie(data.token, authUser);
             }
-            
             if (this.mounted) {
                 this.setState(state => ({
-                    isLogging : false,
-                })); 
+                    isRegistering : false,
+                }));
             }
             
         })
         .catch((err) => {
             console.log(err);
-            this.setState(state => ({
+            this.setState({
+                ...this.state,
                 errMess : err.message
-            }));
+            });
         })
     }
 }

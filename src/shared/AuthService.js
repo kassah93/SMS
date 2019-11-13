@@ -16,8 +16,7 @@ export const setUserCookie = (token, authUser) => {
 
 export const getUserInfo = () => {
     const user = cookie.get("user") ? JSON.parse(cookie.get("user"))  : null;
-    let {id , username} = user;
-    return {id , username};
+    return user;
 } 
 export const logout = () => {
     cookie.remove("user");

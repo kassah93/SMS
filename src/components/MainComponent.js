@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import { Route, Switch} from 'react-router-dom';
 import { getUserInfo } from '../shared/AuthService';
 import UserContext from '../context/UserContext';
 import { Login } from './LoginComponent';
@@ -23,22 +23,22 @@ export class Main extends React.Component {
     }
     
     componentDidMount(){
-        console.log("Mounted");
+        //console.log("Mounted");
         let user = getUserInfo();
         this.setState(state => ({
             ...state,
             user : user
         }));
-        console.log(user);
+        //console.log(user);
     }
 
     render(){
-        console.log(this.state);
+        //console.log(this.state);
         return(
             <Switch>           
                 <UserContext.Provider value = {this.state}>
 
-                    <AuthenticatedRoute path = "/home" Component = {Home} user = {this.state.user} />
+                    <AuthenticatedRoute path = "/home" Component = {Home} />
 
                     <Route path = "/login" >
                         <Login />

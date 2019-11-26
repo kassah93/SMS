@@ -2,7 +2,7 @@ import cookie from 'js-cookie';
 
 
 export const setUserCookie = (token, authUser) => {
-    console.log(token);
+    //console.log(token);
     if (token && typeof(token) === "string" ) {
         let userInfo = {token : token};
         let user = JSON.parse(window.atob(token.split('.')[1]));

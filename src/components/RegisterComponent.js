@@ -1,6 +1,6 @@
 import React , {Component} from 'react';
 import {Redirect, Link } from 'react-router-dom';
-import {Card, CardHeader, CardBody, FormGroup, Form, Button, Input, FormFeedback} from 'reactstrap';
+import {Card, CardHeader, CardBody, FormGroup, Form, Button, Input} from 'reactstrap';
 import {baseUrl} from '../baseUrl';
 import {setUserCookie} from '../shared/AuthService';
 import UserContext from '../context/UserContext';
@@ -47,7 +47,7 @@ export class Register extends Component {
     }
 
     validatePassword(event) {
-        console.log(event.target.parent);
+        //console.log(event.target.parent);
         if (this.state.user.password !== this.state.user.confirmPassword) {
             this.setState(state => ({
                 ...state,
@@ -67,7 +67,7 @@ export class Register extends Component {
             }));
             this.controlSubmitDisabled(false);
         }
-        console.log(this.state.errors);
+        //console.log(this.state.errors);
     }
 
     controlSubmitDisabled(value) {
@@ -139,7 +139,7 @@ export class Register extends Component {
     }
 
      handleRegister(user, authUser)  {
-        console.log("handle Register!!");
+        //console.log("handle Register!!");
         this.setState( state => ({
             isRegistering : true
         }));
@@ -167,7 +167,7 @@ export class Register extends Component {
         .then(data => {
             let errMess = null;
             if(Object.keys(data).includes("errors")){
-                console.log(data.errors);
+                //console.log(data.errors);
                 let key = Object.keys(data.errors)[0];
                 errMess = data.errors[key];
                 let err = new Error(errMess);

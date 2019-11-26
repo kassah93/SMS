@@ -24,14 +24,14 @@ export class Login extends Component {
     }
     handleSubmit(authUser) {
         return (event) => {
-            console.log("submitted!");
+            //console.log("submitted!");
             event.preventDefault();
             this.handleLogin(this.state.user , authUser);
         }
     }
 
     handleChange(event){
-        //console.log(event.target.value);
+        ////console.log(event.target.value);
         let key = event.target.name;
         this.setState({
             ...this.state,
@@ -40,15 +40,15 @@ export class Login extends Component {
                 [key] : event.target.value
             }
         });
-        //console.log(this.state.user);
+        ////console.log(this.state.user);
     }
 
     componentDidMount() {
         this.mounted = true;
-        console.log('Mounted' , this.mounted);
+        //console.log('Mounted' , this.mounted);
     }
     componentWillUnmount() {
-        console.log('unmounted');
+        //console.log('unmounted');
         this.setState(state => ({
             isLogging : false
         }));
@@ -81,7 +81,9 @@ export class Login extends Component {
                                                         <Input type = "password" id = "password" name = "password" placeholder = "Password" />
                                                     </FormGroup>
                                                     
-                                                    <Button type = "submit" color = "primary" block>Sign in</Button>                                  
+                                                    <Button type = "submit" color = "primary" block>
+                                                        Sign in
+                                                    </Button>                                  
                                                 </Form>  
 
                                                 <div className = "primary" >
@@ -112,7 +114,7 @@ export class Login extends Component {
             body :  JSON.stringify(user),           
             
         }).then(res => {
-            //console.log(res.headers);
+            ////console.log(res.headers);
             if (res.ok || res.status === 400) {
                 return res;    
             } else {
@@ -127,7 +129,7 @@ export class Login extends Component {
         .then(data => {
             let errMess = null;
             if(Object.keys(data).includes("errors")){
-                console.log(data.errors);
+                //console.log(data.errors);
                 let key = Object.keys(data.errors)[0];
                 errMess = data.errors[key];
                 let err = new Error(errMess);
@@ -137,7 +139,7 @@ export class Login extends Component {
                 let err = new Error(errMess);
                 throw err;
             } else {
-                //console.log(data);
+                ////console.log(data);
                 setUserCookie(data.token, authUser);
             }
             
@@ -149,8 +151,9 @@ export class Login extends Component {
             
         })
         .catch((err) => {
-            console.log(err);
+            //console.log(err);
             this.setState(state => ({
+                isLogging : false,
                 errMess : err.message
             }));
         })

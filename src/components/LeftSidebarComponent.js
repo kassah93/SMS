@@ -1,5 +1,5 @@
 import React from 'react';
-import {Collapsible} from './CollapsibleComponent';
+//import {Collapsible} from './CollapsibleComponent';
 import {Link} from 'react-router-dom';
 
 export class LeftSidebar extends React.Component {
@@ -9,6 +9,7 @@ export class LeftSidebar extends React.Component {
             visible : true
         };
         this.toggleSidebar = this.toggleSidebar.bind(this);
+        this.toggleElement = this.toggleElement.bind(this);
     }
 
     toggleSidebar() {
@@ -17,6 +18,19 @@ export class LeftSidebar extends React.Component {
         }));
     }
 
+    toggleElement(event) {
+        const app = document.querySelector("a#app");
+        console.log(app.nextSibling.style.display);
+        if (app) {
+            app.classList.toggle("toggled");
+            if(app.nextSibling.style.display !== "block") {
+                app.nextSibling.style.display = "block"; 
+            } else if(app.nextSibling.style.display === "block") {
+                app.nextSibling.style.display = "none"; 
+            }
+            
+        }
+    }
     minimizeSideBar() {
         let body = document.querySelector("#body");
         body.classList.toggle("ls-toggle-menu");
@@ -42,14 +56,22 @@ export class LeftSidebar extends React.Component {
                         </li>
                         <li><a href="index.html"><i className="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
                         <li>
-                            <Collapsible header = {(<a className="menu-toggle waves-effect waves-block"><i className="zmdi zmdi-apps"></i><span>App</span></a>)}> 
+                            <a onClick = {this.toggleElement} id = "app" className="menu-toggle waves-effect waves-block"><i className="zmdi zmdi-apps"></i><span>App</span></a>
+                            <ul className ="ml-menu">
+                                <li><Link to = "students" className = " waves-effect waves-block"> Students</Link></li>
+                                <li><a href="chat.html">Chat Apps</a></li>
+                                <li><a href="events.html">Calendar</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                            
+                            {/*<Collapsible header = {(<a className="menu-toggle waves-effect waves-block"><i className="zmdi zmdi-apps"></i><span>App</span></a>)}> 
                                 <ul >
-                                    <li><a href="mail-inbox.html" className = " waves-effect waves-block"> Email</a></li>
+                                    <li><Link to = "students" className = " waves-effect waves-block"> Students</Link></li>
                                     <li><a href="chat.html">Chat Apps</a></li>
                                     <li><a href="events.html">Calendar</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
-                            </Collapsible>                                                     
+                            </Collapsible>*/}                                                   
                         </li>
                         <li><a onClick = {() => { this.props.logout(); this.props.authUser();}} style = {{cursor : 'pointer'}} ><i className="zmdi zmdi-power"></i><span>Logout</span></a></li>
                     </ul>

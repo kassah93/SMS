@@ -8,3 +8,33 @@
   border : 5px solid #fff;
   box-shadow: 0 0 16px rgba(41,42,51,0.06), 0 6px 20px rgba(41,42,51,0.02);
 }
+
+.c_name {
+  margin: 0px 0px 0px 0px;
+}
+
+@media only screen and (max-width : 950px) {
+  .sm-cell {
+    display: none;
+  }
+}
+
+@media only screen and (max-width : 1200px) {
+  .md-cell {
+    display: none;
+  }
+}
+
+button.btn.btn-info.btn-sm {
+  width: 34.5px;
+  height: 26;
+  margin: auto;
+  padding: 5px 0px;
+}
+
+a i.zmdi.zmdi-hc-fw {
+  color: white;
+}
+
+
+

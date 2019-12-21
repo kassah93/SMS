@@ -1,11 +1,13 @@
 import React from 'react';
-import { Route, Switch} from 'react-router-dom';
-import { getUserInfo } from '../shared/AuthService';
+import { Route, Switch, Redirect} from 'react-router-dom';
+import { getUserInfo, logout } from '../shared/AuthService';
 import UserContext from '../context/UserContext';
 import { Login } from './LoginComponent';
 import { Home } from './HomeComponent';
 import { AuthenticatedRoute } from './AuthenticatedRouteComponent';
 import { Register } from './RegisterComponent';
+import {Students} from './StudentsComponent';
+import { LeftSidebar } from './LeftSidebarComponent';
 
 export class Main extends React.Component {
     constructor(props){
@@ -35,22 +37,31 @@ export class Main extends React.Component {
     render(){
         //console.log(this.state);
         return(
-            <Switch>           
-                <UserContext.Provider value = {this.state}>
+            <div className = "theme-blush" id = "body"> 
+                {this.state.user? <LeftSidebar logout = {logout} authUser = {this.authUser} /> : null}
+                <Switch>                            
+                    <UserContext.Provider value = {this.state}>
+                        <Route path = "/home" >
+                            <AuthenticatedRoute path = "/home" Component = {Home} />
+                        </Route>
+                        
+                        <Route path = "/students" >
+                            <AuthenticatedRoute path = "/students" Component = {Students} />
+                        </Route>                  
 
-                    <AuthenticatedRoute path = "/home" Component = {Home} />
+                        <Route path = "/login" >
+                            <Login />
+                        </Route>
 
-                    <Route path = "/login" >
-                        <Login />
-                    </Route>
+                        <Route path = "/register" >
+                            <Register />
+                        </Route>
 
-                    <Route path = "/register" >
-                        <Register />
-                    </Route>
+                        <Redirect to = "/login" />
 
-                </UserContext.Provider>               
-            </Switch>
-            
+                    </UserContext.Provider>                           
+                </Switch>
+            </div>           
         );
     }
 

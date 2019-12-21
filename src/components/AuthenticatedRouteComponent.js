@@ -1,8 +1,6 @@
 import React from 'react';
-import {Route, Redirect} from 'react-router-dom';
-import { LeftSidebar } from './LeftSidebarComponent';
+import {Redirect} from 'react-router-dom';
 import UserContext from '../context/UserContext';
-import { logout } from '../shared/AuthService';
 import { Content } from './ContentComponent';
 
 
@@ -54,14 +52,13 @@ export class AuthenticatedRoute extends React.Component {
                         if (user) {
                             
                             return (
-                                <div className = "theme-blush" id = "body">                    
-                                    <LeftSidebar logout = {logout} authUser = {authUser} />
+                                                    
                                     <Content>
-                                        <Route path = {path} >
-                                            <Component props = {rest} />
-                                        </Route>
+                                        
+                                        <Component props = {rest} />
+                                                                                
                                     </Content>   
-                                </div>
+                                
                                 );                     
                         } else {
                             if (this.media) {

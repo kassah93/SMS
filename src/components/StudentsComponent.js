@@ -118,7 +118,7 @@ export class Students extends React.Component {
                                 <button className="btn btn-primary btn-sm"><i className="zmdi zmdi-edit"></i></button>
                                 <button className="btn btn-danger btn-sm"><i className="zmdi zmdi-delete"></i></button>
                                 <button className="btn btn-info btn-sm">
-                                    <Link to = {"/students/" + student.id} >
+                                    <Link to = {"/students/" + student.studentId} >
                                         <i className="zmdi zmdi-hc-fw"></i>
                                     </Link>
                                 </button>
@@ -132,9 +132,13 @@ export class Students extends React.Component {
 
             return(
                 <React.Fragment >
+                    
                     <div className = "col-12 mb-3">
-                        <button className="btn btn-success btn-icon float-right" type="button"><i className="zmdi zmdi-plus"></i></button>
+                        <Link to = "/students/new"> 
+                            <button className="btn btn-success btn-icon float-right" type="button"><i className="zmdi zmdi-plus"></i></button>
+                        </Link>
                     </div>
+                    
                     <div className="table-responsive" >
                         <table className="table table-hover mb-0 c_list c_table footable footable-1 footable-paging footable-paging-center breakpoint-lg">
                             <thead>

@@ -8,7 +8,8 @@ import { AuthenticatedRoute } from './AuthenticatedRouteComponent';
 import { Register } from './RegisterComponent';
 import {Students} from './StudentsComponent';
 import { LeftSidebar } from './LeftSidebarComponent';
-
+import {NewStudent} from './NewStudentComponent';
+ 
 export class Main extends React.Component {
     constructor(props){
         super(props);
@@ -45,9 +46,13 @@ export class Main extends React.Component {
                             <AuthenticatedRoute path = "/home" Component = {Home} />
                         </Route>
                         
-                        <Route path = "/students" >
+                        <Route path = "/students" exact>
                             <AuthenticatedRoute path = "/students" Component = {Students} />
-                        </Route>                  
+                        </Route>    
+
+                        <Route path = "/students/new" >
+                            <AuthenticatedRoute path = "/students/new" Component = {NewStudent} />
+                        </Route>             
 
                         <Route path = "/login" >
                             <Login />

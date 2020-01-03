@@ -1,6 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { baseUrl } from '../baseUrl';
+import {Collapsible} from './CollapsibleComponent';
+
+export const Student = ({student, ...props}) => {
+    return(
+        <div className = "container">
+            <div className = "row">
+                <div className = "col-sm-4">
+                    <div className = "alert alert-info">Name</div>
+                </div>
+                <div className = "col-sm-4"> {student.studentName} </div>
+            </div>
+        </div>
+    );
+}
 
 export class Students extends React.Component {
     constructor(props) {
@@ -92,41 +106,105 @@ export class Students extends React.Component {
         } else {
             const studentsTable = this.state.students.students.map(student => {
                 return (           
-                        <tr key = {student.studentId}>          
-                            <td>                      
-                                <p className="c_name"> {student.studentId} </p>
-                            </td>
-                            <td>                      
-                                <p className="c_name"> {student.studentName} </p>
-                            </td>
-                            <td className = "sm-cell">
-                                <span className="phone"><i className="zmdi zmdi-whatsapp mr-2"></i>{student.studentMobile}</span>
-                            </td>
-                            <td className = "sm-cell">                      
-                                <p className="c_name"> {student.fatherName} </p>
-                            </td>
-                            <td className = "sm-cell">
-                                <span className="phone"><i className="zmdi zmdi-whatsapp mr-2"></i>{student.fatherMobile}</span>
-                            </td>
-                            <td className = "md-cell">                      
-                                <p className="c_name"> {student.motherName} </p>
-                            </td>
-                            <td className = "md-cell">
-                                <span className="phone"><i className="zmdi zmdi-whatsapp mr-2"></i>{student.motherMobile}</span>
-                            </td>                          
-                            <td className = "footable-last-visible">
-                                <button className="btn btn-primary btn-sm"><i className="zmdi zmdi-edit"></i></button>
-                                <button className="btn btn-danger btn-sm"><i className="zmdi zmdi-delete"></i></button>
-                                <button className="btn btn-info btn-sm">
-                                    <Link to = {"/students/" + student.studentId} >
-                                        <i className="zmdi zmdi-hc-fw"></i>
-                                    </Link>
-                                </button>
-                                
-                            </td>
-                        </tr>
                         
-                    
+                            <Collapsible   key = {student.studentId}     
+                                header =  {(<React.Fragment>
+                                                <td>                      
+                                                    <p className="c_name"> {student.studentId} </p>
+                                                </td>
+                                                <td>                      
+                                                    <p className="c_name"> {student.studentName} </p>
+                                                </td>
+                                                <td className = "sm-cell">
+                                                    <span className="phone"><i className="zmdi zmdi-whatsapp mr-2"></i>{student.studentMobile}</span>
+                                                </td>
+                                                <td className = "sm-cell">                      
+                                                    <p className="c_name"> {student.fatherName} </p>
+                                                </td>
+                                                <td className = "sm-cell">
+                                                    <span className="phone"><i className="zmdi zmdi-whatsapp mr-2"></i>{student.fatherMobile}</span>
+                                                </td>
+                                                <td className = "md-cell">                      
+                                                    <p className="c_name"> {student.motherName} </p>
+                                                </td>
+                                                <td className = "md-cell">
+                                                    <span className="phone"><i className="zmdi zmdi-whatsapp mr-2"></i>{student.motherMobile}</span>
+                                                </td>                          
+                                                <td className = "footable-last-visible">
+                                                    <button className="btn btn-primary btn-sm"><i className="zmdi zmdi-edit"></i></button>
+                                                    <button className="btn btn-danger btn-sm"><i className="zmdi zmdi-delete"></i></button> 
+                                                </td>
+                                            </React.Fragment>)} 
+                                Component = {"tr"}
+                                children = {<tr>
+                                                <td colSpan = "8" >
+                                                    <div className = "container" >
+                                                        <div className = "row justify-content-center sm-collapse-cell student-detail" >
+                                                            <div className = "col-4 alert alert-info h-100 mr-2 p-1 text-center">
+                                                                Father Name
+                                                            </div>
+                                                            <div className = "col-4 alert alert-dark h-100 p-1 text-center">
+                                                                {student.fatherName ? student.fatherName : " "} 
+                                                            </div>
+                                                        </div>
+
+                                                        <div className = "row justify-content-center sm-collapse-cell student-detail">
+                                                            <div className = "col-4 alert alert-info h-100 mr-2 p-1 text-center">
+                                                                <span className="phone"><i className="zmdi zmdi-whatsapp mr-2"></i></span>
+                                                                Father Mobile
+                                                            </div>
+                                                            <div className = "col-4 alert alert-dark h-100 p-1 text-center">
+                                                                {student.fatherMobile ? student.fatherMobile : " "}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className = "row justify-content-center md-collapse-cell student-detail" >
+                                                            <div className = "col-4 alert alert-info h-100 mr-2 p-1 text-center">
+                                                                Mother Name
+                                                            </div>
+                                                            <div className = "col-4 alert alert-dark h-100 p-1 text-center">
+                                                                {student.motherName ? student.motherName : " "}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className = "row justify-content-center md-collapse-cell student-detail">
+                                                            <div className = "col-4 alert alert-info h-100 mr-2 p-1 text-center ">
+                                                                <span className="phone"><i className="zmdi zmdi-whatsapp mr-2"></i></span>
+                                                                Mother Mobile
+                                                            </div>
+                                                            <div className = "col-4 alert alert-dark h-100 p-1 text-center">
+                                                                {student.motherMobile? student.motherMobile : " "}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className = "row justify-content-center student-detail">
+                                                            <div className = "col-4 alert alert-info text-center  h-100 mr-2 p-1 text-center">
+                                                                Gender
+                                                            </div>
+                                                            <div className = "col-4 text-center alert alert-dark h-100 p-1 text-center">
+                                                                {student.gender == "0" ? "Male" : "Female"}
+                                                            </div>
+                                                        </div>
+                                                        <div className = "row justify-content-center student-detail">
+                                                            <div className = "col-4 alert alert-info text-center  h-100 mr-2 p-1 text-center">
+                                                                Address
+                                                            </div>
+                                                            <div className = "col-4 text-center alert alert-dark h-100 p-1 text-center">
+                                                                {student.address ? student.address : " "}
+                                                            </div>
+                                                        </div>
+                                                        <div className = "row justify-content-center student-detail">
+                                                            <div className = "col-4 alert alert-info text-center  h-100 mr-2 p-1 text-center">
+                                                                Birth City
+                                                            </div>
+                                                            <div className = "col-4 text-center alert alert-dark h-100 p-1 text-center">
+                                                                {student.birthCity ? student.birthCity : " "}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>} />
+                                          
                 );
             })
 

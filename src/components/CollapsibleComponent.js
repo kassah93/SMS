@@ -21,11 +21,14 @@ export class Collapsible extends React.Component {
     }
 
     render(){
+        const Component = this.props.Component;
         return(
-            <div onClick = {this.togglePanel} style = {style}>
-                {this.props.header}
+            <React.Fragment>
+                <Component onClick = {this.togglePanel} style = {style}>
+                    {this.props.header}
+                </Component>
                 {this.state.open? (this.props.children) : null}
-            </div>
+            </React.Fragment>
         );
 
     }

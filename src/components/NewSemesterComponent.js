@@ -3,11 +3,11 @@ import {Card, CardBody, CardHeader, Form, FormGroup, Input, Button, Label} from 
 import {Link} from 'react-router-dom';
 import { baseUrl } from '../baseUrl';
 
-export class NewYear extends React.Component {
+export class NewSemester extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            year : {},                                                           
+            semester : {},                                                           
             isLoading : false,
             isPosting : false,
             success : false,
@@ -27,7 +27,7 @@ export class NewYear extends React.Component {
             postErrMess : null,
             isPosting : false,  
         }));
-        fetch(baseUrl + 'Years/newyear', {
+        fetch(baseUrl + 'Semesters/newsemester', {
             method : 'GET',
             headers : {
                 'Content-type' : 'application/json'
@@ -46,16 +46,16 @@ export class NewYear extends React.Component {
             throw error;       
         })
         .then(res => res.json())
-        .then(year => {
-            console.log(year);
+        .then(semester => {
+            console.log(semester);
             this.setState({  
                 isLoading : false,
-                year : year,
+                semester : semester,
                 errMess : null  
             });
-            let id_input = document.querySelector("input#yearId");
+            let id_input = document.querySelector("input#semesterId");
             if(id_input) {
-                id_input.value = this.state.year.yearId;
+                id_input.value = this.state.semester.semesterId;
             }
             
         })
@@ -68,18 +68,18 @@ export class NewYear extends React.Component {
         });
     }
 ///=========================================================
-    addYear()  {
+    addSemester()  {
         this.setState(state => ({
             isPosting : true,
             success : false,
             postErrMess : null,
         }));
-        fetch(baseUrl + 'Years', {
+        fetch(baseUrl + 'Semesters', {
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json',
             },
-            body :  JSON.stringify(this.state.year),           
+            body :  JSON.stringify(this.state.semester),           
             
         }).then(res => {
             ////console.log(res.headers);
@@ -128,7 +128,7 @@ export class NewYear extends React.Component {
     handleSubmit(event) {
 
         event.preventDefault();
-        this.addYear();
+        this.addSemester();
         
     }
 
@@ -137,12 +137,12 @@ export class NewYear extends React.Component {
         let key = event.target.name;
         this.setState({
             ...this.state,
-            year : {
-                ...this.state.year,
+            semester : {
+                ...this.state.semester,
                 [key] : event.target.value
             }
         });
-        //console.log(this.state.year);
+        //console.log(this.state.semester);
     }
 
     componentDidMount(){
@@ -168,20 +168,20 @@ export class NewYear extends React.Component {
                 </div>
             );
         } else {
-            //console.log(this.state.year.year.yearId);
-            console.log("New Year state is :", this.state)
+            //console.log(this.state.semester.semester.semesterId);
+            console.log("New Semester state is :", this.state)
             if (this.state.success) {
                 return(
                     <div className = "container">
                         <div className = "row">
-                            <div className = "col-sm-12 alert alert-success text-center"> Year has been addess successfully </div>
+                            <div className = "col-sm-12 alert alert-success text-center"> Semester has been addess successfully </div>
                         </div>
                         <div className = "row">
                             <div className = "col-sm-6 primary" >
-                                <Link to = "/years" > Go to years page </Link>
+                                <Link to = "/semesters" > Go to semesters page </Link>
                             </div>
                             <div className = "col-sm-6 primary" >
-                                <Link to = "/years/new" onClick = {this.fetchInitialValues} > Add new year </Link>
+                                <Link to = "/semesters/new" onClick = {this.fetchInitialValues} > Add new semester </Link>
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@ export class NewYear extends React.Component {
                 return (
                     <Card className = "mt-3">
                         <CardHeader className = "login-form-header">
-                            <h3 className = "mt-4"> Add new year </h3> 
+                            <h3 className = "mt-4"> Add new semester </h3> 
                         </CardHeader>
                         <CardBody>
                             <Form  method = "POST" onSubmit = {this.handleSubmit} onChange = {this.handleChange}> 
@@ -199,26 +199,26 @@ export class NewYear extends React.Component {
                                     <div className = "row" >                                 
                                         <div className = "col-sm-6" >                           
                                             <FormGroup>
-                                                <Label  htmlFor = "yearId">Year ID</Label>
-                                                <Input type = "text" id = "yearId" name = "yearId"  placeholder = "Year ID" />
+                                                <Label  htmlFor = "semesterId">Semester ID</Label>
+                                                <Input type = "text" id = "semesterId" name = "semesterId"  placeholder = "Semester ID" />
                                             </FormGroup>
                                         </div>
                                     
                                         <div className = "col-sm-6" >
                                             <FormGroup>
-                                                <Label  htmlFor = "yearName1">Year Name</Label>
-                                                <Input type = "text" id = "yearName1" name = "yearName1" placeholder = "Year Name" />
+                                                <Label  htmlFor = "semesterName1">Semester Name</Label>
+                                                <Input type = "text" id = "semesterName1" name = "semesterName1" placeholder = "Semester Name" />
                                             </FormGroup>
                                         </div>
                                     </div>
                                         
                                     <Button type = "submit" color = "primary" block size = "lg">
                                         {this.state.isPosting? <div><span className="spinner-border spinner-border-sm"></span> Adding...</div> :
-                                        <div>Add year</div>}      
+                                        <div>Add semester</div>}      
                                     </Button> 
                                     
                                     <div className = "primary" >
-                                        <Link to = "/years" > Go back </Link>
+                                        <Link to = "/semesters" > Go back </Link>
                                     </div> 
 
                                     {this.state.postErrMess? (<div className = "alert alert-danger text-center"> {this.state.postErrMess} </div>) : null}

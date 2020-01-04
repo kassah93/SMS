@@ -181,7 +181,7 @@ export class NewStudent extends React.Component {
                                 <Link to = "/students" > Go to students page </Link>
                             </div>
                             <div className = "col-sm-6 primary" >
-                                <Link to = "/students/new" onClick = {this.fetchInitialValues} > add new student </Link>
+                                <Link to = "/students/new" onClick = {this.fetchInitialValues} > Add new student </Link>
                             </div>
                         </div>
                     </div>
@@ -204,25 +204,19 @@ export class NewStudent extends React.Component {
                                             </FormGroup>
                                         </div>
                                     
-
-                                    
                                         <div className = "col-sm-6" >
                                             <FormGroup>
                                                 <Label  htmlFor = "studentName">Student Name</Label>
                                                 <Input type = "text" id = "studentName" name = "studentName" placeholder = "Student Name" />
                                             </FormGroup>
                                         </div>
-                                
-
-                                    
+                    
                                         <div className = "col-sm-6" >
                                             <FormGroup>
                                                 <Label  htmlFor = "studentMobile">Student Mobile</Label>
                                                 <Input type = "text" id = "studentMobile" name = "studentMobile" placeholder = "Student Mobile" />
                                             </FormGroup>
                                         </div>
-                                    
-
                                     
                                         <div className = "col-sm-6" >
                                             <FormGroup>
@@ -231,25 +225,19 @@ export class NewStudent extends React.Component {
                                             </FormGroup>
                                         </div>
                                     
-
-                                    
                                         <div className = "col-sm-6" >
                                             <FormGroup>
                                                 <Label  htmlFor = "fatherMobile">Father Mobile</Label>
                                                 <Input type = "text" id = "fatherMobile" name = "fatherMobile" placeholder = "Father Mobile" />
                                             </FormGroup>
                                         </div>
-                                    
-
-                                    
+                                
                                         <div className = "col-sm-6" >
                                             <FormGroup>
                                                 <Label  htmlFor = "motherName">Mother Name</Label>
                                                 <Input type = "text" id = "motherName" name = "motherName" placeholder = "Mother Name" />
                                             </FormGroup>
                                         </div>
-                                    
-
                                     
                                         <div className = "col-sm-6" >
                                             <FormGroup>

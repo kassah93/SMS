@@ -13,6 +13,8 @@ import { Years } from './YearsComponent';
 import { NewYear } from './NewYearComponent';
 import { Semesters } from './SemestersComponent';
 import { NewSemester } from './NewSemesterComponent';
+import { Sections } from './SectionsComponent';
+import { NewSection } from './NewSectionComponent';
  
 export class Main extends React.Component {
     constructor(props){
@@ -72,7 +74,15 @@ export class Main extends React.Component {
 
                         <Route path = "/semesters/new" >
                             <AuthenticatedRoute path = "/semesters/new" Component = {NewSemester} />
-                        </Route>  
+                        </Route> 
+
+                        <Route path = "/sections" exact>
+                            <AuthenticatedRoute path = "/sections" Component = {Sections} />
+                        </Route>   
+
+                        <Route path = "/sections/new" >
+                            <AuthenticatedRoute path = "/sections/new" Component = {NewSection} />
+                        </Route>   
 
                         <Route path = "/login" >
                             <Login />

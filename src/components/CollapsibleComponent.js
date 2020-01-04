@@ -1,10 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Collapse } from 'reactstrap';
 
 const style = {
     cursor : 'pointer'
 };
 
-export class Collapsible extends React.Component {
+export const Collapsible = (props) => {
+    const [isOpen, setIsOpen] = useState(false);
+  
+    const toggle = () => setIsOpen(!isOpen);
+
+    const Component = props.Component;
+
+    return (
+        <React.Fragment >
+            <Component onClick = {toggle} style = {style}>
+                {props.header}
+            </Component>
+            <tr>
+                <td colSpan = "8" style = {{padding : "0px"}}>
+                    <Collapse isOpen = {isOpen} className = "my-3" >
+                        {props.children}
+                    </Collapse>           
+                </td>
+            </tr>
+            
+        </React.Fragment>
+    );
+}
+
+
+
+/*export class Collapsible extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,4 +59,4 @@ export class Collapsible extends React.Component {
         );
 
     }
-}
+}*/

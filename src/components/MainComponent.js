@@ -9,6 +9,7 @@ import { Register } from './RegisterComponent';
 import {Students} from './StudentsComponent';
 import { LeftSidebar } from './LeftSidebarComponent';
 import {NewStudent} from './NewStudentComponent';
+import { Years } from './YearsComponent';
  
 export class Main extends React.Component {
     constructor(props){
@@ -52,7 +53,11 @@ export class Main extends React.Component {
 
                         <Route path = "/students/new" >
                             <AuthenticatedRoute path = "/students/new" Component = {NewStudent} />
-                        </Route>             
+                        </Route>    
+
+                        <Route path = "/years" exact>
+                            <AuthenticatedRoute path = "/years" Component = {Years} />
+                        </Route>          
 
                         <Route path = "/login" >
                             <Login />

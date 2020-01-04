@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export class Content extends React.Component {
     toggleSideBar() {
@@ -8,6 +9,19 @@ export class Content extends React.Component {
         }
     }
     render(){
+        const breadcrumbs = this.props.path.substr(1).split("/").map((path, index, arr) => {
+            if (index === arr.length -1) {
+                return(
+                <li className="breadcrumb-item active">{path.toUpperCase()}</li>    
+                );
+            }
+            else {
+                return(
+                    <li className="breadcrumb-item"><Link to = {"/" + path}> {path.toUpperCase()} </Link></li>
+                );
+            }          
+        });
+
         return(
             <React.Fragment>
                 <section className="content">
@@ -15,10 +29,10 @@ export class Content extends React.Component {
                         <div className="block-header">
                             <div className="row">
                                 <div className="col-lg-7 col-md-6 col-sm-12">
-                                    <h2>Dashboard</h2>
+                                    
                                     <ul className="breadcrumb">
-                                        <li className="breadcrumb-item"><a href="index.html"><i className="zmdi zmdi-home"></i> Aero</a></li>
-                                        <li className="breadcrumb-item active">Dashboard 1</li>
+                                        <li className="breadcrumb-item"><Link to="/home"><i className="zmdi zmdi-home"></i> SMS </Link></li>
+                                        {breadcrumbs}
                                     </ul>
                                     <button onClick = {this.toggleSideBar} className="btn btn-primary btn-icon mobile_menu" type="button"><i className="zmdi zmdi-sort-amount-desc"></i></button>
                                     

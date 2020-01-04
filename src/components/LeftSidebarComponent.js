@@ -59,19 +59,13 @@ export class LeftSidebar extends React.Component {
                             <a onClick = {this.toggleElement} id = "app" className="menu-toggle waves-effect waves-block"><i className="zmdi zmdi-apps"></i><span>App</span></a>
                             <ul className ="ml-menu">
                                 <li><Link to = "/students" className = " waves-effect waves-block"> Students</Link></li>
-                                <li><a href="chat.html">Chat Apps</a></li>
-                                <li><a href="events.html">Calendar</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                            
-                            {/*<Collapsible header = {(<a className="menu-toggle waves-effect waves-block"><i className="zmdi zmdi-apps"></i><span>App</span></a>)}> 
-                                <ul >
-                                    <li><Link to = "students" className = " waves-effect waves-block"> Students</Link></li>
-                                    <li><a href="chat.html">Chat Apps</a></li>
-                                    <li><a href="events.html">Calendar</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
-                            </Collapsible>*/}                                                   
+                                <li><Link to = "/years" className = " waves-effect waves-block"> Years</Link></li>
+                                <li><Link to = "/semesters" className = " waves-effect waves-block"> Semesters</Link></li>
+                                <li><Link to = "/sections" className = " waves-effect waves-block"> Sections</Link></li>
+                                <li><Link to = "/grades" className = " waves-effect waves-block"> Grades</Link></li>
+                                <li><Link to = "/subjects" className = " waves-effect waves-block"> Subjects</Link></li>
+                                
+                            </ul>                                                  
                         </li>
                         <li><a onClick = {() => { this.props.logout(); this.props.authUser();}} style = {{cursor : 'pointer'}} ><i className="zmdi zmdi-power"></i><span>Logout</span></a></li>
                     </ul>

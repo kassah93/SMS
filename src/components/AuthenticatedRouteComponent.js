@@ -53,7 +53,7 @@ export class AuthenticatedRoute extends React.Component {
                             
                             return (
                                                     
-                                    <Content>
+                                    <Content path = {path}>
                                         
                                         <Component props = {rest} />
                                                                                 

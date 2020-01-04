@@ -2,15 +2,72 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { baseUrl } from '../baseUrl';
 import {Collapsible} from './CollapsibleComponent';
+import {Collapse} from 'reactstrap';
 
-export const Student = ({student, ...props}) => {
+export const StudentDetail = ({student, ...props}) => {
     return(
-        <div className = "container">
-            <div className = "row">
-                <div className = "col-sm-4">
-                    <div className = "alert alert-info">Name</div>
+        <div className = "container" >
+            <div className = "row justify-content-center sm-collapse-cell student-detail" >
+                <div className = "col-4 alert alert-info h-100 mr-2 p-1 text-center">
+                    Father Name
                 </div>
-                <div className = "col-sm-4"> {student.studentName} </div>
+                <div className = "col-4 alert alert-dark h-100 p-1 text-center">
+                    {student.fatherName ? student.fatherName : " "} 
+                </div>
+            </div>
+
+            <div className = "row justify-content-center sm-collapse-cell student-detail">
+                <div className = "col-4 alert alert-info h-100 mr-2 p-1 text-center">
+                    <span className="phone"><i className="zmdi zmdi-whatsapp mr-2"></i></span>
+                    Father Mobile
+                </div>
+                <div className = "col-4 alert alert-dark h-100 p-1 text-center">
+                    {student.fatherMobile ? student.fatherMobile : " "}
+                </div>
+            </div>
+
+            <div className = "row justify-content-center md-collapse-cell student-detail" >
+                <div className = "col-4 alert alert-info h-100 mr-2 p-1 text-center">
+                    Mother Name
+                </div>
+                <div className = "col-4 alert alert-dark h-100 p-1 text-center">
+                    {student.motherName ? student.motherName : " "}
+                </div>
+            </div>
+
+            <div className = "row justify-content-center md-collapse-cell student-detail">
+                <div className = "col-4 alert alert-info h-100 mr-2 p-1 text-center ">
+                    <span className="phone"><i className="zmdi zmdi-whatsapp mr-2"></i></span>
+                    Mother Mobile
+                </div>
+                <div className = "col-4 alert alert-dark h-100 p-1 text-center">
+                    {student.motherMobile? student.motherMobile : " "}
+                </div>
+            </div>
+
+            <div className = "row justify-content-center student-detail">
+                <div className = "col-4 alert alert-info text-center  h-100 mr-2 p-1 text-center">
+                    Gender
+                </div>
+                <div className = "col-4 text-center alert alert-dark h-100 p-1 text-center">
+                    {student.gender == "0" ? "Male" : "Female"}
+                </div>
+            </div>
+            <div className = "row justify-content-center student-detail">
+                <div className = "col-4 alert alert-info text-center  h-100 mr-2 p-1 text-center">
+                    Address
+                </div>
+                <div className = "col-4 text-center alert alert-dark h-100 p-1 text-center">
+                    {student.address ? student.address : " "}
+                </div>
+            </div>
+            <div className = "row justify-content-center student-detail">
+                <div className = "col-4 alert alert-info text-center  h-100 mr-2 p-1 text-center">
+                    Birth City
+                </div>
+                <div className = "col-4 text-center alert alert-dark h-100 p-1 text-center">
+                    {student.birthCity ? student.birthCity : " "}
+                </div>
             </div>
         </div>
     );
@@ -136,86 +193,31 @@ export class Students extends React.Component {
                                                 </td>
                                             </React.Fragment>)} 
                                 Component = {"tr"}
-                                children = {<tr>
+                                children = {(<StudentDetail student = {student} />)}
+                                /*children = {<tr>
                                                 <td colSpan = "8" >
-                                                    <div className = "container" >
-                                                        <div className = "row justify-content-center sm-collapse-cell student-detail" >
-                                                            <div className = "col-4 alert alert-info h-100 mr-2 p-1 text-center">
-                                                                Father Name
-                                                            </div>
-                                                            <div className = "col-4 alert alert-dark h-100 p-1 text-center">
-                                                                {student.fatherName ? student.fatherName : " "} 
-                                                            </div>
-                                                        </div>
-
-                                                        <div className = "row justify-content-center sm-collapse-cell student-detail">
-                                                            <div className = "col-4 alert alert-info h-100 mr-2 p-1 text-center">
-                                                                <span className="phone"><i className="zmdi zmdi-whatsapp mr-2"></i></span>
-                                                                Father Mobile
-                                                            </div>
-                                                            <div className = "col-4 alert alert-dark h-100 p-1 text-center">
-                                                                {student.fatherMobile ? student.fatherMobile : " "}
-                                                            </div>
-                                                        </div>
-
-                                                        <div className = "row justify-content-center md-collapse-cell student-detail" >
-                                                            <div className = "col-4 alert alert-info h-100 mr-2 p-1 text-center">
-                                                                Mother Name
-                                                            </div>
-                                                            <div className = "col-4 alert alert-dark h-100 p-1 text-center">
-                                                                {student.motherName ? student.motherName : " "}
-                                                            </div>
-                                                        </div>
-
-                                                        <div className = "row justify-content-center md-collapse-cell student-detail">
-                                                            <div className = "col-4 alert alert-info h-100 mr-2 p-1 text-center ">
-                                                                <span className="phone"><i className="zmdi zmdi-whatsapp mr-2"></i></span>
-                                                                Mother Mobile
-                                                            </div>
-                                                            <div className = "col-4 alert alert-dark h-100 p-1 text-center">
-                                                                {student.motherMobile? student.motherMobile : " "}
-                                                            </div>
-                                                        </div>
-
-                                                        <div className = "row justify-content-center student-detail">
-                                                            <div className = "col-4 alert alert-info text-center  h-100 mr-2 p-1 text-center">
-                                                                Gender
-                                                            </div>
-                                                            <div className = "col-4 text-center alert alert-dark h-100 p-1 text-center">
-                                                                {student.gender == "0" ? "Male" : "Female"}
-                                                            </div>
-                                                        </div>
-                                                        <div className = "row justify-content-center student-detail">
-                                                            <div className = "col-4 alert alert-info text-center  h-100 mr-2 p-1 text-center">
-                                                                Address
-                                                            </div>
-                                                            <div className = "col-4 text-center alert alert-dark h-100 p-1 text-center">
-                                                                {student.address ? student.address : " "}
-                                                            </div>
-                                                        </div>
-                                                        <div className = "row justify-content-center student-detail">
-                                                            <div className = "col-4 alert alert-info text-center  h-100 mr-2 p-1 text-center">
-                                                                Birth City
-                                                            </div>
-                                                            <div className = "col-4 text-center alert alert-dark h-100 p-1 text-center">
-                                                                {student.birthCity ? student.birthCity : " "}
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                   <StudentDetail student = {student} />   
+                                                    
                                                 </td>
-                                            </tr>} />
+                                            </tr>} */
+                                            />
                                           
                 );
             })
 
             return(
-                <React.Fragment >
-                    
-                    <div className = "col-12 mb-3">
-                        <Link to = "/students/new"> 
-                            <button className="btn btn-success btn-icon float-right" type="button"><i className="zmdi zmdi-plus"></i></button>
-                        </Link>
+                <div className = "container" >
+                    <div className = "row">
+                        <div className = "col-9">
+                            <h3 className = "text-center">Students</h3>
+                        </div>
+                        <div className = "col-3 mb-3">
+                            <Link to = "/students/new"> 
+                                <button className="btn btn-success btn-icon float-right" type="button"><i className="zmdi zmdi-plus"></i></button>
+                            </Link>
+                        </div>
                     </div>
+                    
                     
                     <div className="table-responsive" >
                         <table className="table table-hover mb-0 c_list c_table footable footable-1 footable-paging footable-paging-center breakpoint-lg">
@@ -237,7 +239,7 @@ export class Students extends React.Component {
                             </tbody>
                         </table>
                     </div>
-                </React.Fragment>
+                </div>
             );
         }
     }

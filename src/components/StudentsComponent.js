@@ -142,14 +142,24 @@ export class Students extends React.Component {
     render() {
         if (this.state.students.errMess) {
             return(
-                <React.Fragment>
-                    <div className = "col-12 mb-5">
-                        <button className="btn btn-success btn-icon float-right" type="button"><i className="zmdi zmdi-plus"></i></button>
+                
+                <div className = "container" >
+                    <div className = "row">
+                        <div className = "col-9">
+                            <h3 className = "text-center">Students</h3>
+                        </div>
+                        <div className = "col-3 mb-3">
+                            <Link to = "/students/new"> 
+                                <button className="btn btn-success btn-icon float-right" type="button"><i className="zmdi zmdi-plus"></i></button>
+                            </Link>
+                        </div>
                     </div>
-                    <div className = "alert alert-danger" style = {{width : "50%" , margin : "auto"}}>
-                        {this.state.students.errMess}
-                    </div>
-                </React.Fragment>
+                    <div className = "row">
+                        <div className = "alert alert-danger" style = {{width : "50%" , margin : "auto"}}>
+                            {this.state.students.errMess}
+                        </div>
+                    </div>  
+                </div>
             );
         }
         else if (this.state.students.isLoading) {

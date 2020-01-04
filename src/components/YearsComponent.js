@@ -74,14 +74,23 @@ export class Years extends React.Component {
     render(){
         if (this.state.years.errMess) {
             return(
-                <React.Fragment>
-                    <div className = "col-12 mb-5">
-                        <button className="btn btn-success btn-icon float-right" type="button"><i className="zmdi zmdi-plus"></i></button>
+                <div className = "container" >
+                    <div className = "row">
+                        <div className = "col-9">
+                            <h3 className = "text-center">Years</h3>
+                        </div>
+                        <div className = "col-3 mb-3">
+                            <Link to = "/years/new"> 
+                                <button className="btn btn-success btn-icon float-right" type="button"><i className="zmdi zmdi-plus"></i></button>
+                            </Link>
+                        </div>
                     </div>
-                    <div className = "alert alert-danger" style = {{width : "50%" , margin : "auto"}}>
-                        {this.state.years.errMess}
-                    </div>
-                </React.Fragment>
+                    <div className = "row">
+                        <div className = "alert alert-danger" style = {{width : "50%" , margin : "auto"}}>
+                            {this.state.years.errMess}
+                        </div>
+                    </div>  
+                </div>
             );
         }
         else if (this.state.years.isLoading) {

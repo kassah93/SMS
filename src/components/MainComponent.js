@@ -10,6 +10,7 @@ import {Students} from './StudentsComponent';
 import { LeftSidebar } from './LeftSidebarComponent';
 import {NewStudent} from './NewStudentComponent';
 import { Years } from './YearsComponent';
+import { NewYear } from './NewYearComponent';
  
 export class Main extends React.Component {
     constructor(props){
@@ -57,7 +58,11 @@ export class Main extends React.Component {
 
                         <Route path = "/years" exact>
                             <AuthenticatedRoute path = "/years" Component = {Years} />
-                        </Route>          
+                        </Route>  
+                        
+                        <Route path = "/years/new" >
+                            <AuthenticatedRoute path = "/students/new" Component = {NewYear} />
+                        </Route>        
 
                         <Route path = "/login" >
                             <Login />

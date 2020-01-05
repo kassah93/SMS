@@ -1,1 +1,1 @@
-export  const baseUrl = process.env.baseUrl || "http://localhost/api/";
+export  const baseUrl = process.env.BASE_URL || "http://localhost/api/";

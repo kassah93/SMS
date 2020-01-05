@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { baseUrl } from '../baseUrl';
 import {Collapsible} from './CollapsibleComponent';
-import {Collapse} from 'reactstrap';
 
 export const StudentDetail = ({student, ...props}) => {
     return(
@@ -50,7 +49,7 @@ export const StudentDetail = ({student, ...props}) => {
                     Gender
                 </div>
                 <div className = "col-4 text-center alert alert-dark h-100 p-1 text-center">
-                    {student.gender == "0" ? "Male" : "Female"}
+                    {student.gender === "0" ? "Male" : "Female"}
                 </div>
             </div>
             <div className = "row justify-content-center student-detail">

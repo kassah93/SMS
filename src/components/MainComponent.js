@@ -47,7 +47,7 @@ export class Main extends React.Component {
         //console.log(this.state);
         return(
             <div className = "theme-blush" id = "body"> 
-                {this.state.user? <LeftSidebar logout = {logout} authUser = {this.authUser} /> : null}
+                {this.state.user? <LeftSidebar logout = {logout} authUser = {this.authUser} user = {this.state.user} /> : null}
                 <Switch>                            
                     <UserContext.Provider value = {this.state}>
                         <Route path = "/home" >

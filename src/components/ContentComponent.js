@@ -12,12 +12,12 @@ export class Content extends React.Component {
         const breadcrumbs = this.props.path.substr(1).split("/").map((path, index, arr) => {
             if (index === arr.length -1) {
                 return(
-                <li className="breadcrumb-item active">{path.toUpperCase()}</li>    
+                <li className="breadcrumb-item active" key = {path}>{path.toUpperCase()}</li>    
                 );
             }
             else {
                 return(
-                    <li className="breadcrumb-item"><Link to = {"/" + path}> {path.toUpperCase()} </Link></li>
+                    <li className="breadcrumb-item" key = {path}><Link to = {"/" + path}> {path.toUpperCase()} </Link></li>
                 );
             }          
         });

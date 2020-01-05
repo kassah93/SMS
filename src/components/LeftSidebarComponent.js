@@ -2,6 +2,8 @@ import React from 'react';
 //import {Collapsible} from './CollapsibleComponent';
 import {Link} from 'react-router-dom';
 
+
+
 export class LeftSidebar extends React.Component {
     constructor(props) {
         super(props);
@@ -34,6 +36,7 @@ export class LeftSidebar extends React.Component {
     minimizeSideBar() {
         let body = document.querySelector("#body");
         body.classList.toggle("ls-toggle-menu");
+        
     }
 
     render() {
@@ -47,9 +50,9 @@ export class LeftSidebar extends React.Component {
                     <ul className="list">
                         <li>
                             <div className="user-info">
-                                <a className="image" href="profile.html"><img src="assets/images/profile_av.jpg" alt="User"/></a>
-                                <div className="detail">
-                                    <h4>Michael</h4>
+                               
+                                <div className="detail m-auto">
+                                    <h4>{this.props.user.username}</h4>
                                     <small>Super Admin</small>
                                 </div>
                             </div>

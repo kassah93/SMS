@@ -99,7 +99,7 @@ export class Register extends Component {
                             <div className = "container" >
                                 <div className = "row">
                                     <div className = "col-lg-4 col-sm-12">
-                                        <Card className = "mt-3">
+                                        <Card outline color = "secondary" className = "mt-3" style = {{border : "2px solid"}}>
                                             <CardHeader className = "login-form-header">
                                                 <h3> Sign up </h3> 
                                             </CardHeader>
@@ -118,7 +118,10 @@ export class Register extends Component {
                                                         {this.state.errors.confirmPassword && <div className = "text-danger" > {this.state.errors.confirmPassword} </div>} 
                                                     </FormGroup>
                                                     
-                                                    <Button id = "signup" type = "submit" color = "primary" block>Sign up</Button>                                  
+                                                    <Button id = "signup" type = "submit" color = "primary" block>
+                                                        {this.state.isRegistering? <div><span className="spinner-border spinner-border-sm"></span> Registering...</div> :
+                                                        <div>Sign up</div>}     
+                                                    </Button>                                  
                                                 </Form>  
 
                                                 <div className = "primary" >

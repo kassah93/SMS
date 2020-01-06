@@ -68,7 +68,7 @@ export class Login extends Component {
                             <div className = "container" >
                                 <div className = "row">
                                     <div className = "col-lg-4 col-sm-12">
-                                        <Card className = "mt-3">
+                                        <Card outline color = "secondary" className = "mt-3" style = {{border : "2px solid"}}>
                                             <CardHeader className = "login-form-header">
                                                 <h3> Log in </h3> 
                                             </CardHeader>
@@ -82,7 +82,8 @@ export class Login extends Component {
                                                     </FormGroup>
                                                     
                                                     <Button type = "submit" color = "primary" block>
-                                                        Sign in
+                                                        {this.state.isLogging? <div><span className="spinner-border spinner-border-sm"></span> Logging in...</div> :
+                                                        <div>Login</div>}
                                                     </Button>                                  
                                                 </Form>  
 

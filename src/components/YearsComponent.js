@@ -1,7 +1,7 @@
 import React from 'react';
-import {Card, CardBody, CardHeader, CardTitle} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { baseUrl } from '../baseUrl';
+import { ContentCard } from './ContentCardComponent';
 
 
 
@@ -102,16 +102,10 @@ export class Years extends React.Component {
                 </div>
             );
         } else {
+            
             const years = this.state.years.years.map(year => (
-                <div className = "col-md-4" key = {year.yearId}>
-                    <Card outline color = "info" style = {{border : "2px solid" , maxHeight : "100px"}}  >
-                        <CardHeader> {year.yearId} </CardHeader>
-                        <CardBody >
-                            <CardTitle> {year.yearName1} </CardTitle>
-                        </CardBody>
-                    </Card>
-                </div>
-                
+                <ContentCard type = "Year" color = "info" ID = {year.yearId} 
+                             name = {year.yearName1} />
             ));
 
             return(

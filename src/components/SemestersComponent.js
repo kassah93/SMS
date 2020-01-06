@@ -1,8 +1,7 @@
 import React from 'react';
-import {Card, CardBody, CardHeader, CardTitle} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { baseUrl } from '../baseUrl';
-
+import { ContentCard } from './ContentCardComponent';
 
 
 export class Semesters extends React.Component {
@@ -103,15 +102,8 @@ export class Semesters extends React.Component {
             );
         } else {
             const semesters = this.state.semesters.semesters.map(semester => (
-                <div className = "col-md-4" key = {semester.semesterId}>
-                    <Card outline color = "success" style = {{border : "2px solid" , maxHeight : "100px"}}  >
-                        <CardHeader> {semester.semesterId} </CardHeader>
-                        <CardBody >
-                            <CardTitle> {semester.semesterName1} </CardTitle>
-                        </CardBody>
-                    </Card>
-                </div>
-                
+                <ContentCard type = "Semester" color = "success" ID = {semester.semesterId} 
+                             name = {semester.semesterName1} />
             ));
 
             return(

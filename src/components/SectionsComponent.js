@@ -1,7 +1,7 @@
 import React from 'react';
-import {Card, CardBody, CardHeader, CardTitle, CardText} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { baseUrl } from '../baseUrl';
+import { ContentCard } from './ContentCardComponent';
 
 
 
@@ -102,18 +102,10 @@ export class Sections extends React.Component {
                 </div>
             );
         } else {
+            
             const sections = this.state.sections.sections.map(section => (
-                <div className = "col-md-4" key = {section.sectionId}>
-                    <Card outline color = "primary" style = {{border : "2px solid" , maxHeight : "150px"}}  >
-                        <CardHeader> {section.sectionId} </CardHeader>
-                        <CardBody >
-                            <CardTitle> {section.sectionName1} </CardTitle>
-                            <CardText>
-                                <small className="text-muted"> {section.sectionSymbol} </small>
-                            </CardText>
-                        </CardBody>
-                    </Card>
-                </div>
+                <ContentCard type = "Section" color = "primary" ID = {section.sectionId} 
+                             name = {section.sectionName1} symbol = {section.sectionSymbol} />
                 
             ));
 

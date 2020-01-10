@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import { Content } from './ContentComponent';
 
@@ -44,7 +44,7 @@ export class AuthenticatedRoute extends React.Component {
         }   
     }
     render(){     
-        let {Component , path, ...rest} = this.props;
+        let {Component , path, exact, ...rest} = this.props;
         return(      
             <UserContext.Consumer>             
                 {
@@ -52,13 +52,13 @@ export class AuthenticatedRoute extends React.Component {
                         if (user) {
                             
                             return (
-                                                    
+                                <Route path = {path} exact = {exact} >                  
                                     <Content path = {path}>
                                         
                                         <Component props = {rest} />
                                                                                 
                                     </Content>   
-                                
+                                </Route>
                                 );                     
                         } else {
                             if (this.media) {

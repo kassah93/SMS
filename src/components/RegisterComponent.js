@@ -192,10 +192,10 @@ export class Register extends Component {
         })
         .catch((err) => {
             console.log(err);
-            this.setState({
-                ...this.state,
+            this.setState(state => ({
+                isRegistering : false,
                 errMess : err.message
-            });
+            }));
         })
     }
 }

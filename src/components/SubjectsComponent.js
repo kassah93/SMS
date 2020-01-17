@@ -127,12 +127,12 @@ export class Subjects extends React.Component {
             const renderSubject = (subject) => {
                 const header = (
                     
-                    <Card outline color = "info" style = {{border : "1px solid"}} >
+                    <Card outline color = "info" style = {{border : "1px solid"}} key = {subject.subjectId} >
                         
                         <CardHeader className = "ml-0">
                             
                             {subject.general ? (<div className = "badge badge-light">
-                                                    <i class="zmdi zmdi-hc-fw"></i>
+                                                    <i className="zmdi zmdi-hc-fw"></i>
                                                 </div>) : null}
                              
                             <div className = "badge badge-info" >
@@ -164,7 +164,8 @@ export class Subjects extends React.Component {
                     });
                     return (
                         <Nestable  header   = {header}
-                                   children = {childs} />
+                                   children = {childs}
+                                   key      = {subject.subjectId} />
                     );
                 }
             }
@@ -172,12 +173,10 @@ export class Subjects extends React.Component {
             const subjectsElems = subjectArr.map(subject => {
                 if (subject.glevel === 0) {
                     return(
-                        <div className = "row">
-                            <div className = "container">
-                                <div className = "col-6" >
-                                    {renderSubject(subject)}
-                                </div>                            
-                            </div>
+                        <div className = "row" key = {subject.subjectId}>
+                            <div className = "col-6" >
+                                {renderSubject(subject)}
+                            </div>                            
                         </div>
                     );  
                    //return renderSubject(subject);

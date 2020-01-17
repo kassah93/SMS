@@ -69,3 +69,7 @@ td:last-child{
 div section.content {
   margin-left: 210px;
 }
+
+div.nestIcon {
+  float: left;
+}

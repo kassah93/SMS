@@ -17,6 +17,7 @@ import { Sections } from './SectionsComponent';
 import { NewSection } from './NewSectionComponent';
 import { Grades } from './GradesComponent';
 import { NewGrade } from './NewGradeComponent';
+import { Subjects } from './SubjectsComponent';
  
 export class Main extends React.Component {
     constructor(props){
@@ -72,6 +73,9 @@ export class Main extends React.Component {
                         <AuthenticatedRoute exact path = "/grades" Component = {Grades} />
                        
                         <AuthenticatedRoute path = "/grades/new" Component = {NewGrade} />
+
+                        <AuthenticatedRoute exact path = "/subjects" Component = {Subjects} />
+
  
                         <Route path = "/login" >
                             <Login />

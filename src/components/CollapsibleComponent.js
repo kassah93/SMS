@@ -31,6 +31,29 @@ export const Collapsible = (props) => {
 
 
 
+
+
+export const Nestable = (props) => {
+    const [isOpen, setIsOpen] = useState(false);
+  
+    const toggle = () => setIsOpen(!isOpen);
+
+    return (
+        
+        <React.Fragment >
+            <div onClick = {toggle} style = {style}>              
+                {props.header}
+            </div>
+            
+            <Collapse isOpen = {isOpen} className = "my-3 ml-3" >
+                {props.children}
+            </Collapse>           
+        </React.Fragment>
+    );
+}
+
+
+
 /*export class Collapsible extends React.Component {
     constructor(props) {
         super(props);

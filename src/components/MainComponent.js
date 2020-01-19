@@ -19,6 +19,7 @@ import { Grades } from './GradesComponent';
 import { NewGrade } from './NewGradeComponent';
 import { Subjects } from './SubjectsComponent';
 import { NewSubject } from './NewSubjectComponent';
+import { Enrollments } from './EnrollmentsComponents';
  
 export class Main extends React.Component {
     constructor(props){
@@ -34,6 +35,11 @@ export class Main extends React.Component {
             authUser : this.authUser,
         };
     }
+
+    setData = (newState) => {
+        console.log("Main state is" ,this.state);
+       this.setState(state => newState);
+    }
     
     componentDidMount(){
         //console.log("Mounted");
@@ -46,7 +52,7 @@ export class Main extends React.Component {
     }
 
     render(){
-        //console.log(this.state);
+        console.log(this.state);
         return(
             <div className = "theme-blush" id = "body"> 
                 {this.state.user? <LeftSidebar logout = {logout} authUser = {this.authUser} user = {this.state.user} /> : null}
@@ -79,6 +85,8 @@ export class Main extends React.Component {
 
                         <AuthenticatedRoute path = "/subjects/new" Component = {NewSubject} />
 
+                        <AuthenticatedRoute exact path = "/enrollments" Component = {Enrollments} setParentData = {this.setData} />
+
  
                         <Route path = "/login" >
                             <Login />
@@ -89,7 +97,7 @@ export class Main extends React.Component {
                         </Route>
 
                         <Redirect to = "/login" />
-
+                        
                     </UserContext.Provider>                           
                 </Switch>
             </div>           

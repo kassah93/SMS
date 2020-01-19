@@ -67,6 +67,7 @@ export class LeftSidebar extends React.Component {
                                 <li><Link to = "/sections" className = " waves-effect waves-block"> Sections</Link></li>
                                 <li><Link to = "/grades" className = " waves-effect waves-block"> Grades</Link></li>
                                 <li><Link to = "/subjects" className = " waves-effect waves-block"> Subjects</Link></li>
+                                <li><Link to = "/enrollments" className = " waves-effect waves-block"> Enrollments</Link></li>
                                 
                             </ul>                                                  
                         </li>

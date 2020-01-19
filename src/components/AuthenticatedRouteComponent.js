@@ -45,6 +45,7 @@ export class AuthenticatedRoute extends React.Component {
     }
     render(){     
         let {Component , path, exact, ...rest} = this.props;
+        
         return(      
             <UserContext.Consumer>             
                 {
@@ -55,7 +56,7 @@ export class AuthenticatedRoute extends React.Component {
                                 <Route path = {path} exact = {exact} >                  
                                     <Content path = {path}>
                                         
-                                        <Component props = {rest} />
+                                        <Component {...rest} />
                                                                                 
                                     </Content>   
                                 </Route>

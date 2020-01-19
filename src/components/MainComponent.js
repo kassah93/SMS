@@ -20,6 +20,8 @@ import { NewGrade } from './NewGradeComponent';
 import { Subjects } from './SubjectsComponent';
 import { NewSubject } from './NewSubjectComponent';
 import { Enrollments } from './EnrollmentsComponents';
+import { NewEnrollment } from './NewEnrollmentComponent';
+import { EnrollmentDetail } from './EnrollmentDetailComponent';
  
 export class Main extends React.Component {
     constructor(props){
@@ -52,7 +54,7 @@ export class Main extends React.Component {
     }
 
     render(){
-        console.log(this.state);
+        console.log("Main State is " ,this.state);
         return(
             <div className = "theme-blush" id = "body"> 
                 {this.state.user? <LeftSidebar logout = {logout} authUser = {this.authUser} user = {this.state.user} /> : null}
@@ -87,6 +89,15 @@ export class Main extends React.Component {
 
                         <AuthenticatedRoute exact path = "/enrollments" Component = {Enrollments} setParentData = {this.setData} />
 
+                        <Switch>
+                            <AuthenticatedRoute exact path = "/enrollments/new" Component = {NewEnrollment} years = {this.state.years} 
+                                        sections = {this.state.sections} semesters = {this.state.semesters} grades = {this.state.grades} />
+
+
+                            <AuthenticatedRoute exact path = "/enrollments/:id" Component = {EnrollmentDetail} years = {this.state.years} 
+                                        sections = {this.state.sections} semesters = {this.state.semesters} grades = {this.state.grades} 
+                                        />
+                        </Switch>
  
                         <Route path = "/login" >
                             <Login />

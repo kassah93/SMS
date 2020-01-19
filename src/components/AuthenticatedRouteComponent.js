@@ -46,6 +46,7 @@ export class AuthenticatedRoute extends React.Component {
     render(){     
         let {Component , path, exact, ...rest} = this.props;
         
+
         return(      
             <UserContext.Consumer>             
                 {
@@ -53,13 +54,17 @@ export class AuthenticatedRoute extends React.Component {
                         if (user) {
                             
                             return (
-                                <Route path = {path} exact = {exact} >                  
-                                    <Content path = {path}>
+                                <Route path = {path} exact = {exact} 
+                                    render = { ({match}) => (
                                         
-                                        <Component {...rest} />
-                                                                                
-                                    </Content>   
-                                </Route>
+                                        <Content path = {match.url} >
+                                            {console.log("match is " ,match)}
+                                            <Component {...rest} id = {match.params.id} />
+                                                                                    
+                                        </Content>   
+                                    )}
+                                    /> 
+                                    
                                 );                     
                         } else {
                             if (this.media) {

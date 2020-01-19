@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { baseUrl } from '../baseUrl';
-import {Card, CardBody, CardHeader, Button, CardText, Badge, CardFooter} from 'reactstrap';
+import {Card, CardBody, CardHeader, Button, Badge} from 'reactstrap';
+import { fetchData, fetchIndividualData } from '../shared/fetchData';
 
 const EnrollmentCard = ({ID , year, section, semester, grade ,color}) => {
     return(
@@ -96,61 +97,10 @@ export class Enrollments extends React.Component {
                 grades    : [],
                 errMess   : null   
             }
-        }
-    }
+        };
 
-    fetchData(name){
-        this.setState(state => ({
-            [name] : {
-                isLoading : true,
-                [name]    : [],
-                errMess   : null
-            }       
-        }));
-        fetch(baseUrl + name + '/Read?from=0', {
-            method : 'GET',
-            headers : {
-                'Content-type' : 'application/json'
-            }
-        })
-        .then(res => {
-            if(res.ok) {
-                return res;
-            } else {
-                var err = new Error('Error ' + res.status + ' : ' + res.statusText);
-                err.response = res;
-                throw err  
-            }
-        }, err => {
-            let error = new Error(err.message);
-            throw error;       
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            this.setState(state => ({
-                [name] : {
-                    isLoading : false,
-                    [name]    : data,
-                    errMess   : null  
-                }
-            }));
-            this.props.setParentData({
-                [name] : data,
-            })
-        })
-        .catch(err => {
-            console.log(err);
-            this.setState(state => ({
-                [name] : {
-                    isLoading : false,
-                    [name]    : [],
-                    errMess   : err.message  
-                }
-            }));
-        });
+        this.fetchData = fetchData.bind(this);
     }
-
     
     componentDidMount() {
         this.fetchData('enrollments');

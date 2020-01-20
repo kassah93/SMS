@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { Collapse } from 'reactstrap';
 import {Link} from 'react-router-dom';
-import {Card, CardBody, CardHeader, Button, Badge} from 'reactstrap';
 import { fetchData, fetchIndividualData } from '../shared/fetchData';
+import {NewStudentEnrollment} from './NewStudentEnrollmentComponent';
+import { NewEnrollmentSubject } from './NewEnrollmentSubject';
 
 const EnrollmentInfo = ({id, year, section, semester, grade}) => (
     <div className = "row" >
@@ -74,8 +75,14 @@ const style = {
 
     return (
         <React.Fragment >
-            <div onClick = {toggle} style = {style}>
-                {props.header}
+            <div className = "row" >
+                <div onClick = {toggle} style = {style} className = "col-9 mt-3">
+                    {props.header}
+                </div>
+                
+                <div className = "col-3 my-3">
+                    {props.button}
+                </div>
             </div>
                 
             <Collapse isOpen = {isOpen} className = "my-3" >
@@ -85,6 +92,7 @@ const style = {
         </React.Fragment>
     );
 }
+
 
 //=================================================================
 
@@ -108,10 +116,44 @@ export class EnrollmentDetail extends React.Component {
                 isLoading : false,
                 subjects  : [],
                 errMess   : null  
+            },
+
+            studentModal : {
+                isOpen : false,
+            },
+
+            subjectModal : {
+                isOpen : false
             }
         }
         this.fetchData           = fetchData.bind(this);  
         this.fetchIndividualData = fetchIndividualData.bind(this);
+        this.toggleStudentModal = this.toggleStudentModal.bind(this);
+        this.toggleSubjectModal = this.toggleSubjectModal.bind(this);
+    }
+
+    toggleStudentModal(e) {
+        this.setState(state => ({
+            studentModal : {
+                isOpen : !state.studentModal.isOpen
+            }
+        }), () => {
+            if(!this.state.studentModal.isOpen){
+                this.fetchIndividualData('enrollment', this.props.id);
+                }
+            });
+    }
+
+    toggleSubjectModal(e) {
+        this.setState(state => ({
+            subjectModal : {
+                isOpen : !state.subjectModal.isOpen
+            }
+        }), () => {
+            if(!this.state.subjectModal.isOpen){
+                this.fetchIndividualData('enrollment', this.props.id);
+                }
+            });
     }
 
   componentDidMount() {
@@ -119,6 +161,7 @@ export class EnrollmentDetail extends React.Component {
       this.fetchData('students');
       this.fetchData('subjects');
   }  
+
 
   render() {
 
@@ -221,35 +264,43 @@ export class EnrollmentDetail extends React.Component {
                                     semester = {this.props.semesters.filter(semester => semester.semesterGUID === this.state.enrollment.enrollment.semesterGUID)[0]}
                                     grade    = {this.props.grades.filter(grade => grade.gradeGUID === this.state.enrollment.enrollment.gradeGUID)[0]} 
                                 />
-                    
-                    
+
                     <EnrollmentCollapse header = {
-                        (<div className = "row">
-                            <div className = "col-12 mt-3" >
-                                <div className = "alert alert-success">
-                                    Enrollment Students
-                                </div>
-                            </div>
-                        </div>)}
+                        (<div className = "alert alert-success">
+                            Enrollment Students
+                         </div>)    
+                        }
+                        button = {
+                            <button onClick = {this.toggleStudentModal} name = "studentModal" className="btn btn-success btn-icon float-right" type="button"><i className="zmdi zmdi-plus"></i></button>  
+                        }
 
                         children = {enrollmentStudents}
                         />
 
                     <EnrollmentCollapse header = {
-                        (<div className = "row">
-                            <div className = "col-12 mt-3" >
-                                <div className = "alert alert-primary">
-                                    Enrollment Subjects
-                                </div>
-                            </div>
-                        </div>)}
+                        (<div className = "alert alert-primary">
+                            Enrollment Subjects
+                         </div>)}
+
+                         button = {
+                            <button onClick = {this.toggleSubjectModal} name = "subjectModal" className="btn btn-primary btn-icon float-right" type="button"><i className="zmdi zmdi-plus"></i></button>
+                         }
 
                         children = {enrollmentSubjects}
                         />
-                     
+
+                    {this.state.studentModal.isOpen? (<NewStudentEnrollment isOpen = {this.state.studentModal.isOpen} toggle = {this.toggleStudentModal}
+                                students = {this.state.students.students} enrollmentGUID = {this.state.enrollment.enrollment.enrollmentGUID}
+                                />) : null}
+                    
+                    {this.state.subjectModal.isOpen? (<NewEnrollmentSubject isOpen = {this.state.subjectModal.isOpen} toggle = {this.toggleSubjectModal}
+                                subjects = {this.state.subjects.subjects} enrollmentGUID = {this.state.enrollment.enrollment.enrollmentGUID}
+                                />) : null}
+
                 </div>
             );
         }
     }
 
 }
+
